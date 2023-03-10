@@ -27,7 +27,7 @@ Download to your server using - wget https://github.com/prometheus/alertmanager/
 ## Download WMI Exporter
 Go to the following link - https://github.com/prometheus-community/windows_exporter/releases
 
-Download & Install the window.msi, make sure check the service is running 
+Download & Install the windows.msi,make sure check the service is running 
 
 ```
 NOTE: Please check the YML Files and check the syntax using promtool & amtool
