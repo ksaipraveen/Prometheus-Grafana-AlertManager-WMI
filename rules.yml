@@ -1,0 +1,56 @@
+groups:
+- name: alert.rules
+  rules:
+  - alert: InstanceDown
+    expr: up == 0
+    for: 1m
+    labels:
+      severity: 'critical'
+    annotations:
+      title: 'Instance {{ $labels.instance }} down'
+      description: '{{ $labels.instance }} from {{ $labels.job }} has been down for more than 1 minute.'
+
+  - alert: WindowsServerCpuUsage
+    expr: 100 - (avg by (instance) (rate(windows_cpu_time_total{mode="idle"}[2m])) * 100) > 95
+    for: 10m
+    labels:
+      severity: 'critical'
+    annotations:
+      title: 'Windows Server CPU Usage {{ $labels.instance }} reached above 95'
+      description: 'Server- {{ $labels.instance }} from {{ $labels.job }}  CPU Usage is more than 95%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}'
+
+  - alert: WindowsServerMemoryUsage
+    expr: 100 - ((windows_os_physical_memory_free_bytes / windows_cs_physical_memory_bytes) * 100) > 90
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      title: 'Windows Server Memory Usage {{ $labels.instance }} reached above 90'
+      description: 'Server- {{ $labels.instance }} from {{ $labels.job }} Memory Usage is more than 90%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}'
+
+  - alert: WindowsServerDiskSpaceUsage
+    expr: 100.0 - 100 * ((windows_logical_disk_free_bytes / 1024 / 1024 ) / (windows_logical_disk_size_bytes / 1024 / 1024)) > 85
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      title: 'Windows Server disk Space Usage {{ $labels.instance }}'
+      description: "Server- {{ $labels.instance }} from {{ $labels.job }} Disk usage is more than 85%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+  - alert: WindowsServerDiskSpaceUsage
+    expr: 100.0 - 100 * ((windows_logical_disk_free_bytes / 1024 / 1024 ) / (windows_logical_disk_size_bytes / 1024 / 1024)) > 90
+    for: 1m
+    labels:
+      severity: 'critical'
+    annotations:
+      title: 'Windows Server disk Space Usage for {{ $labels.instance }}'
+      description: "Server- {{ $labels.instance }} from {{ $labels.job }} Disk usage is more than 90%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+  - alert: MetaDataServiceStatus
+    expr: windows_service_state{name="mtsrv",state="stopped"} != 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      title: 'MetaTrade Service {{ $labels.instance }} stopped'
+      description: 'Server- {{ $labels.instance }} from {{ $labels.job }} mtsrv service has been stopped for more than 1 minute.'

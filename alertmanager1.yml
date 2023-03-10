@@ -1,0 +1,13 @@
+route:
+ receiver: 'email-notifications'
+
+receivers:
+- name: 'email-notifications'
+  email_configs:
+  - to: receiver@gmail.com
+    from: sender@gmail.com
+    smarthost: smtp.gmail.com:587
+    auth_username: sender@gmail.com
+    auth_identity: sender@gmail.com
+    auth_password: password  #APP PASSWORD
+    send_resolved: true
