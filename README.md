@@ -1,7 +1,8 @@
 # Prometheus-Grafana-AlertManager-WMI
 ## Download Prometheus
 Go to the follwing link - https://prometheus.io/download/
-Copy link address prometheus-2.42.0.linux-amd64.tar.gz
+
+Copy link address - prometheus-2.42.0.linux-amd64.tar.gz
 
 Download to your server using - wget https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz
 
@@ -20,7 +21,8 @@ http://your_ip:3000
 ```
 ## Download AlertManager
 Go to the link - https://prometheus.io/download/
-copy link address alertmanager-0.25.0.linux-amd64.tar.gz
+
+copy link address - alertmanager-0.25.0.linux-amd64.tar.gz
 
 Download to your server using - wget https://github.com/prometheus/alertmanager/releases/download/v0.25.0/alertmanager-0.25.0.linux-amd64.tar.gz
 
